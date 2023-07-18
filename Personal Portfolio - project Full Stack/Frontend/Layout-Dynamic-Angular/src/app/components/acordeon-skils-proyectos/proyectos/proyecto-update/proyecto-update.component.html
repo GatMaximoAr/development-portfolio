@@ -1,0 +1,176 @@
+<div class="container mt-5">
+    <div class="row mb-5 bordeDiv">
+        
+        <div class="row">
+            <div class="col-6 d-flex">
+                <div>
+                    <button class="btn btn-primary mt-2 mx-1" (click)="goHome()">
+                         Home
+                    </button>
+                </div>
+                <div class="mt-2 ms-2">
+                    <h5>
+                        Agregar Item Proyecto
+                     </h5>
+                     <hr>
+                </div>
+               </div>
+
+               <div class="col-6 mt-3">
+                <div class="d-flex flex-row-reverse">
+                    <div>
+                        <button class="btn btn-danger ms-3" (click)="deleteItem()">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 d-flex">
+                <div>
+                    <h3 class="mb-3">{{item.titulo}}</h3>
+                </div>
+        
+            </div>
+        
+    
+            <div class="row">
+                <div class="col-4 flex-column justify-content-center">
+                    <div class="row">
+                        <div class="d-flex ">
+                            <div>
+                                <a href={{item.vinculo_img}} target="_blank">
+                                    <img src={{item.imagen}} alt="Logo IPEM 137" class="logoIpem img-fluid">
+                                </a>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-8 d-flex flex-column justify-content-start">
+                    <div class="row">
+                        <div class="d-flex">
+                            <div>
+                                <p>{{item.sobre_proyecto}}</p>
+                            </div>
+            
+                        </div>
+                            
+                    </div> 
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <form class="d-flex ms-4" [formGroup]="formularioItemPro" (ngSubmit)="onSubmit(formularioItemPro.value)">
+                <div class="row d-flex flex-row">
+                    
+                    <div class="mb-3">
+                        <label for="titulo educacion" class="form-label">Titulo de proyecto</label>
+                        <input type="text" class="form-control" id="Titulo" placeholder="Titulo" formControlName="titulo">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Imagen educacion" class="form-label">Imagen de proyecto</label>
+                        <input type="file" class="form-control" id="Imagen" (change)="datosImg($event)" formControlName="imagen">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="vinculo de Imagen" class="form-label">Vinculo imagen</label>
+                        <input type="text" class="form-control" id="img_href" placeholder="Url" formControlName="vinculo_img">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="educacion" class="form-label">Sobre proyecto</label>
+                        <textarea cols="10" rows="3" class="form-control" id="sobre_educacion" placeholder="Escribe aqui" formControlName="sobre_proyecto"></textarea>
+                    </div>
+                    
+                    <button [disabled]="formularioItemPro.invalid" type="submit" class="btn btn-primary mt-5 mb-3 ">
+                        Vista Previa 
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <ng-container *ngIf="formularioEnviado">
+        <div class="row my-5 bordeDiv">
+            <div class="row">
+
+                <div class="col-4 d-flex">
+                    <div>
+                        <h3 class="mb-3 mt-2">{{previewEnvio.titulo}}</h3>
+                    </div>
+                </div>
+            
+            </div>
+            
+            <div class="row">
+                <div class="col-4 flex-column justify-content-center">
+                    <div class="row">
+
+                        <div class="d-flex ">
+                            <div>
+                                <a href={{previewEnvio.vinculo_img}} target="_blank">
+                                    <img src={{previewEnvio.imagen}} alt="Logo IPEM 137" class="logoIpem img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+                <div class="col-8 d-flex flex-column justify-content-center">
+                    <div class="row">
+
+                        <div class="d-flex">
+                            <div>
+                                <p>{{previewEnvio.sobre_proyecto}}</p>
+                            </div>
+                        </div>
+                            
+                    </div> 
+                    
+                </div>
+            
+            </div>
+
+            <div class="d-flex mt-5 mb-3 flex-row justify-content-center">
+                <div *ngIf="!envio; else loading">
+                    <button class="btn btn-success mx-2" (click)="enviarform()">
+                        Enviar
+                    </button>
+                </div>
+
+                <ng-template #loading>
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                      </button>
+                </ng-template>
+
+                <div>
+                    <button [disabled]="envio" class="btn btn-danger mx-2" (click)="resetForm()">
+                        Deshacer
+                    </button> 
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+</div>
+
+<ngx-spinner bdColor="white" 
+            color="rgba(63, 188, 238, 0.993)"
+            size="large" type="ball-triangle-path"
+            [fullScreen]="true">
+        
+            <p class="mt-5" style="font-size: 20px; color: black">Cargando espera...</p>
+        </ngx-spinner>

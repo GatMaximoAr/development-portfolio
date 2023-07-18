@@ -1,0 +1,9 @@
+.card {
+    background-color: lightsteelblue;
+}
+
+.fondo-login {
+    background-image: url(../../../assets/fondo-login/Fondo-login.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

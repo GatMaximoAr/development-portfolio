@@ -1,0 +1,152 @@
+<div class="container">
+    <div class="row mt-5 mb-5 bordeDiv">
+        <div class="row mb-3">
+
+            <div class="col-6 mt-3 d-flex">
+                <div>
+                    <button class="btn btn-primary me-3" (click)="goHome()">
+                         Home
+                    </button>
+                </div>
+                <div>
+                    <h5>
+                        Editar acerca de usuario
+                        <hr>
+                    </h5>
+                </div>
+            </div>
+    
+            <div class="col-6 mt-3">
+                <div class="d-flex flex-row-reverse">
+                    <div>
+                        <button class="btn btn-danger ms-3" (click)="deleteItem()">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <form class="d-flex ms-4" [formGroup]="formularioAcercaDe" (ngSubmit)="onSubmit(formularioAcercaDe.value)">
+                <div class="row d-flex flex-row">
+
+                    <div class="mb-3 form-group">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName="nombre_usuario">
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName="apellido_usuario">
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="img_perfil" class="form-label">Selecione imagen de perfil</label>
+                        <input type="file" class="form-control" id="apellido" (change)="capturar_img_perfil($event)" formControlName="imagen">
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="sobre usuario" class="form-label">Sobre usuario</label>
+                        <textarea cols="10" rows="3" class="form-control" id="sobre_usuario" placeholder="Escribe aqui" formControlName="sobre_usuario"></textarea>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="ocupacion" class="form-label">Ocupacion</label>
+                        <input type="text" class="form-control" id="ocupacion" placeholder="Ingrese ocupacion" formControlName="ocupacion">
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="img_portada" class="form-label">Selecione imagen de portada</label>
+                        <input type="file" class="form-control" id="portada" (change)="capturar_img_forndo($event)" formControlName="img_portada">
+                    </div>
+
+                    <button [disabled]="formularioAcercaDe.invalid" type="submit" class="btn btn-primary mt-5 mb-3 ">
+                        Vista Previa 
+                    </button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <ng-container *ngIf="formularioEnviado">
+        <div class="row d-flex my-5 bordeDiv">
+            
+            <div class="row">
+                <div class="row mt-3 mb-3">
+                    <div class="imagenPortada">
+                        <a href="#">
+                            <img src={{previewEnvio.img_portada}} alt="Imagen de portada" class="Imgport">
+                        </a>     
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-2 d-flex flex-column text-center">
+                    <div>
+                        <div class="row">
+                            <div>
+                                <img src={{previewEnvio.imagen}} alt="Imagen de perfil de Gatica Maximo" class="mt-1 imgPerfil img-fluid">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mt-2">
+                                <h5>{{previewEnvio.nombre_usuario}}  {{previewEnvio.apellido_usuario}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <p>
+                                    {{previewEnvio.ocupacion}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-10">
+                    <div class="row">
+                        <h4 class="mb-3">Acerca de</h4>
+                    </div>
+                    
+                    <div class="row d-flex">
+                        <p>
+                            {{(previewEnvio.sobre_usuario)}}
+                        </p>
+                    </div>
+                     
+                </div>
+            </div>
+
+            <div class="d-flex mt-5 mb-3 flex-row justify-content-center">
+                <div *ngIf="!envio; else loading">
+                    <button class="btn btn-success mx-2" (click)="enviarform()">
+                        Enviar
+                    </button>
+                </div>
+
+                <ng-template #loading>
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                      </button>
+                </ng-template>
+
+                <div>
+                    <button [disabled]="envio" class="btn btn-danger mx-2" (click)="resetForm()">
+                        Deshacer
+                    </button> 
+                </div>
+            </div>
+
+        </div>
+        
+    </ng-container>
+</div>

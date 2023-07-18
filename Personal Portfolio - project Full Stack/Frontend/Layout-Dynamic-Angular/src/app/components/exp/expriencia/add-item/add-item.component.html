@@ -1,0 +1,121 @@
+<div class="cointainer mt-5">
+    <div class="row m-3 mb-5 bordeDiv">
+        <div class="row">
+           <div class="col-4 d-flex">
+            <div>
+                <button class="btn btn-primary mt-2 mx-1" (click)="goHome()">
+                     Home
+                </button>
+            </div>
+            <div class="mt-2 ms-2">
+                <h5>
+                    Agregar Item Experiencia
+                 </h5>
+                 <hr>
+            </div>
+           </div>
+
+           <div class="row mt-5">
+            <form class="d-flex ms-4" [formGroup]="formularioItemXp" (ngSubmit)="onSubmit(formularioItemXp.value)">
+                <div class="row d-flex flex-row">
+
+                    <div class="mb-3">
+                        <label for="Form-Imagen" class="form-label">Nueva Imagen</label>
+                        <input type="file" class="form-control" id="Imagen"(change)="datosImg($event)" formControlName="img_experiencia">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="text" class="form-label">Vinculo para la imagen</label>
+                        <input type="text" class="form-control" id="text" placeholder="Vinculo" formControlName="img_href">
+                      </div>
+
+                      <div class="mb-3">
+                        <textarea class="form-control" id="text" cols="15" rows="3" placeholder="Mas Informacion" formControlName="sobre_experiencia"></textarea>
+                      </div>
+
+                      <ng-container formArrayName="actividad">
+                        <ng-container *ngFor="let listaArray of actividad.controls; index as i">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">
+                                <strong>Valor de Lista</strong>
+                                    <span>
+                                        <button [disabled]="formularioItemXp.invalid" type="button" class="btn btn-danger ms-2" (click)="deleteItemList(i)">x</button> 
+                                    </span>
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" formControlName= "{{i}}"  class="form-control mb-3">
+                            </div>
+                        </ng-container>
+                        <div>
+                            <button type="button" class="mt-2 btn btn-primary" (click)="addItemlist()">Agregar campo</button>
+                        </div>
+                    </ng-container>
+
+                    <button [disabled]="formularioItemXp.invalid" type="submit" class="btn btn-primary mt-5 mb-3">
+                        Vista Previa 
+                    </button>
+                </div>
+                
+            </form>
+           </div>
+        </div>
+    </div>
+
+
+    <ng-container *ngIf="formularioEnviado">
+        <div class="row m-3 my-5 bordeDiv">
+            
+            <div class="col-4 d-flex flex-column justify-content-center">
+                <div class="row">
+                    <div  class="d-flex my-3">
+                        <div>
+                            <a href="{{previewEnvio.img_href}}" target="_blank">
+                                <img src={{previewEnvio.img_experiencia}} alt="Logo Contra Editorial" class="logo img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="d-flex my-2">
+                    <div class="d-flex">
+                        <p>{{previewEnvio.sobre_experiencia}}</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-5 flex-column-reverse justify-content-center my-3">
+                        
+                <div>
+                    <ul *ngFor="let itemlist of previewEnvio.actividad" class="list-group">
+                        <li class="list-group-item bg-info m-1"> 
+                            <strong>{{itemlist}}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex mt-5 mb-3 flex-row justify-content-center">
+                <div *ngIf="!envio; else loading">
+                    <button class="btn btn-success mx-2" (click)="enviarform()">
+                        Enviar
+                    </button>
+                </div>
+
+                <ng-template #loading>
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                      </button>
+                </ng-template>
+
+                <div>
+                    <button [disabled]="envio" class="btn btn-danger mx-2" (click)="resetForm()">
+                        Deshacer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+  
+
+     

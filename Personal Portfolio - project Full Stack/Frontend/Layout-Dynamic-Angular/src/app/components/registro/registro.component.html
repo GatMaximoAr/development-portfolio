@@ -1,0 +1,42 @@
+<div class="container-fluid fondo-login">
+    <div class="row">
+        <div class="d-flex flex-colunm justify-content-center mt-5 mb-5">
+            <div class="card border-secondary w-50 mb-5">
+                <div class="card-body py-3">
+                    <h3 class="card-title">Registrarse</h3>
+                    <form [formGroup]="formRegistro" (ngSubmit)="onRegistro(formRegistro.value)">
+                        
+                        <div class="mb-3">
+                            <label for="form_userName" class="form-label">Nuevo Usuario</label>
+                            <input type="text" class="form-control" id="username" placeholder="Ingrese Nombre de Usuario" formControlName="nombreUsuario">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="form_Email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="username" placeholder="Ingrese Correo Electronico" formControlName="email">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="form_password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Ingrese Password" formControlName="password">
+                          </div>
+    
+                          <ng-container *ngIf="errorRegistro">
+                            <small class="text-danger"> <b>{{mensajeError}}</b> </small>
+                        </ng-container>
+                          <div>
+                            <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-success mt-2 form-control">
+                                Registrarse
+                            </button>
+                          </div>
+                        </form>
+
+
+                        <h6 class="text-primary mt-3">Ya tienes cuenta? <a class="text-success" routerLink="/login">Inicia Sesion</a></h6>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+</div>

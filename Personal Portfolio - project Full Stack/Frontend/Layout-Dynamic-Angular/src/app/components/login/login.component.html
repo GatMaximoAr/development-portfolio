@@ -1,0 +1,43 @@
+<div class="container-fluid fondo-login">
+    <div class="row">
+        <div class="d-flex flex-colunm justify-content-center mt-5 mb-5">
+            <div class="card border-secondary w-50 mb-5">
+                <div class="card-body py-3">
+                    <h3 class="card-title">Login</h3>
+                    <form class="mb-5" [formGroup]="formularioLogin" (ngSubmit)="onLogin(formularioLogin.value)">
+                        <div class="mb-3">
+                            <label for="form_password" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="username" placeholder="Ingrese Nombre de Usuario" formControlName="nombreUsuario">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="form_password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Ingrese Password" formControlName="password">
+                          </div>
+    
+                          <ng-container *ngIf="logError">
+                            <small class="text-danger"> <b>Usuario y/o Password son incorectos</b> </small>
+                        </ng-container>
+
+                          <div *ngIf="!clickLog; else cargando">
+                            <button type="submit" [disabled]="formularioLogin.invalid" class="btn btn-success mt-2 form-control">
+                                Login
+                            </button>
+                          </div>
+
+                          <ng-template #cargando>
+                            <button class="btn btn-success form-control" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                              </button>
+                          </ng-template>
+                    </form>
+
+                    <h6 class="text-danger">Aun no tienes cuenta? <a routerLink="/singUp">Registrate</a></h6>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,21 @@
+.bordeDiv {
+    border-width: 1px;
+    border-style: ridge;
+    border-color: lightsteelblue;
+}
+
+.imgPerfil {
+    width: 125px; 
+    height: auto;
+    border: 5px inset aquamarine;
+    border-radius: 25%;
+}
+
+.Imgport {
+    width: 100%;
+    height: 300px;
+    display: block;
+    position: relative;
+    margin: auto;
+    border-radius: 10%;
+}

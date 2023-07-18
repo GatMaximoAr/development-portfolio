@@ -1,0 +1,46 @@
+<div class="row m-3 mt-5 p-3 bordeDiv">
+    <div class="row">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="d-flex flex-column">
+    
+                        <div class="mb-3">
+                            <h2>Educacion</h2>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="formaciones.length != 0; else noData">
+
+            <ng-container *ngFor="let item of formaciones">
+                <app-educacion-item [data]="item" (deleteEmit)="deleteItem($event)">
+    
+                </app-educacion-item>
+            </ng-container>
+
+        </div>
+
+
+        <ng-template #noData>
+            <h4 class="text-center mt-3">No hay datos para esta seccion</h4>
+          </ng-template>
+
+        <div class="mt-2 d-flex flex-row justify-content-center align-content-center">
+            <div>
+                <button routerLink="add-item-edu" class="btn btn-white rounded-pill hover-Green" [ngClass]="[isAdmin ? '' : 'oculto']">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="75" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                      </svg>
+                 </button>
+            </div>
+    
+         </div>
+    
+        
+    </div>
+</div>

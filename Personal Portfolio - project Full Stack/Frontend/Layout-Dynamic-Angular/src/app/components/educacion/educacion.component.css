@@ -1,0 +1,18 @@
+.logoIpem {
+    height: 150px;
+    width: 150px;
+}
+
+.bordeDiv {
+    border-width: 2px;
+    border-style: ridge;
+    border-color: rgb(1, 7, 15);
+}
+
+.oculto {
+    display: none;
+}
+
+button.hover-Green:hover{
+    background-color: rgb(106, 248, 182);
+}

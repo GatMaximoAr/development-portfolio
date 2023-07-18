@@ -1,0 +1,7 @@
+.oculto {
+    display: none;
+}
+
+button.hover-Green:hover{
+    background-color: rgb(106, 248, 182);
+}

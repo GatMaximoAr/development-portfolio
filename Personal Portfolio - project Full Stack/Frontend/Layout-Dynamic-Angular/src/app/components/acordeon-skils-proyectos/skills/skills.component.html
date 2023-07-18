@@ -1,0 +1,102 @@
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <h4>Hard and Soft Skills</h4>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+          <div class="row">
+
+            <div *ngIf="items.length != 0; else noData">
+
+              <ng-container *ngFor="let item of items">
+
+                <app-skill-item [data]="item">
+
+                </app-skill-item>
+              </ng-container>
+
+            </div>
+
+              <ng-template #noData>
+                <h4 class="text-center mt-3">No hay datos para esta seccion</h4>
+              </ng-template>
+
+              <ng-container *ngIf="!agrega; else nuevo">
+                <div class="mt-2 d-flex flex-row justify-content-center align-content-center">
+                  <div>
+                      <button class="btn btn-white rounded-pill hover-Green" [ngClass]="[isAdmin ? '' : 'oculto']" (click)="switchValue()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="75" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                       </button>
+                  </div>
+          
+               </div>
+              </ng-container>
+
+              
+              
+
+             <ng-template #nuevo>
+
+              <div class="row">
+                <h6>Nueva skill</h6>
+              </div>
+          
+              <div class="d-flex flex-row justify-content-center mt-2 mb-3">
+                <form class="d-flex col-4 flex-column" id="skillForm" [formGroup]="formularioSkill" (ngSubmit)="onSubmit(formularioSkill.value)">
+          
+                  <div class="mb-2">
+                    <label for="titulo Skill" class="form-label">Titulo de Skill</label>
+                    <input type="text" class="form-control" id="Titulo" placeholder="Habilidad" formControlName="titulo">
+                  </div>
+          
+                  <div class="mb-2">
+                    <label class="form-label" for="color">Color de Barra</label>
+                    <select class="form-control" name="color" id="color" form="skillForm" formControlName="color">
+                      <option value="" selected disabled hidden>Elige un color</option>
+                      <option value="bg-dark">Negro</option>
+                      <option value="bg-success">Verde</option>
+                      <option value="bg-danger">Rojo</option>
+                      <option value="bg-warning">Amarillo</option>
+                      <option value="bg-primary">Azul</option>
+                      <option value="bg-info">Celeste</option>
+                    </select>
+                  </div>
+          
+                  <div class="mb-2">
+                    <label for="porcentaje" class="form-label">porcentaje de dominio</label>
+                    <input type="number" max="100" min="1" class="form-control" id="porcentaje" placeholder="porcentaje" formControlName="porcentaje">
+                  </div>
+                  
+                  <div *ngIf="!envio else loading">
+                    <button [disabled]="formularioSkill.invalid" type="submit" class="btn btn-primary mt-5 mb-3">
+                      Enviar 
+                  </button>
+                  </div>
+
+                  <ng-template #loading>
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                      </button>
+                    </ng-template>
+          
+                  <div>
+                    <button [disabled]="envio" type="button" class="btn btn-danger" (click)="switchValue()">
+                    Cancelar
+                  </button>
+                </div>
+
+                </form>
+              </div>
+
+             </ng-template>
+
+          </div>
+      </div>
+    </div>
+  </div>
